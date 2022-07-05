@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
+import io.cucumber.java.After;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.List;
 public class StepDefinition {
 
     private String remoteUrl;
+    private String path;
     private PostService postService;
     private List<Post> posts;
 
@@ -35,12 +37,24 @@ public class StepDefinition {
     }
     @Then("all posts are stored in {string} with each post in a separate file with name post_id.json")
     public void all_posts_are_stored_in_with_each_post_in_a_separate_file_with_name_post_id_json(String path) throws IOException {
+        this.path = path;
         SaveUtils.save(path, posts);
 
         for (Post postIndex : posts) {
             String fileName = postIndex.getId() + ".json";
             Path postIndexPath = Paths.get(path, fileName);
             Assertions.assertTrue(Files.exists(postIndexPath));
+        }
+    }
+
+    @After
+    public void removePostsIfPresent() throws IOException {
+        for (Post postIndex : posts) {
+            String fileName = postIndex.getId() + ".json";
+            Path postIndexPath = Paths.get(path, fileName);
+            if (Files.exists(postIndexPath)) {
+                Files.delete(postIndexPath);
+            }
         }
     }
 
