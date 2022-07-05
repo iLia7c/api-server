@@ -1,0 +1,6 @@
+server:
+  port: 8096
+  servlet:
+    context-path: /
+remote:
+  posts: https://jsonplaceholder.typicode.com/posts
