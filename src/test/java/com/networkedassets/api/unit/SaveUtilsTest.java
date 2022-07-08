@@ -1,5 +1,6 @@
 package com.networkedassets.api.unit;
 
+import com.networkedassets.api.entities.Comment;
 import com.networkedassets.api.entities.Post;
 import com.networkedassets.api.ex.StoreException;
 import com.networkedassets.api.utils.SaveUtils;
@@ -47,6 +48,7 @@ public class SaveUtilsTest {
         post.setId(1L);
         post.setUserId(2L);
         post.setTitle("title");
+        post.updateComments(Arrays.asList(new Comment()));
         return post;
     }
 }

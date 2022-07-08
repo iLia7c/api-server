@@ -1,6 +1,8 @@
 package com.networkedassets.api.entities;
 
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.List;
 
 public class Post {
 
@@ -9,7 +11,11 @@ public class Post {
     private String title;
     private String body;
 
-    public Post() {}
+    private List<Comment> commentList;
+
+    public Post() {
+        commentList = new ArrayList<>();
+    }
 
     public Long getUserId() {
         return userId;
@@ -41,6 +47,18 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void updateComments(List<Comment> list) {
+        commentList.addAll(list);
+    }
+
+    public void cleanComments() {
+        commentList.clear();
     }
 
     @Override

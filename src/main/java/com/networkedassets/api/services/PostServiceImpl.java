@@ -1,6 +1,7 @@
 package com.networkedassets.api.services;
 
 import com.networkedassets.api.entities.Post;
+import com.networkedassets.api.entities.Comment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,6 +24,17 @@ public class PostServiceImpl implements PostService {
                 .bodyToFlux(Post.class);
 
         return UserFlux.collectList().block();
+    }
+
+    @Override
+    public List<Comment> getComments(long id) {
+        Flux<Comment> userComments = WebClient.create()
+                .get()
+                .uri(String.format("%s/%d/comments", postsUri, id))
+                .retrieve()
+                .bodyToFlux(Comment.class);
+
+        return userComments.collectList().block();
     }
 
     public String getPostsUri() {
