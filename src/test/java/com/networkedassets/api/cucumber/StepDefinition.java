@@ -46,7 +46,7 @@ public class StepDefinition {
 
         for (Post postIndex : posts) {
             List<Comment> comments = postService.getComments(postIndex.getId());
-            postIndex.updateComments(comments);
+            postIndex.appendComments(comments);
         }
     }
 

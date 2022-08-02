@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService {
     public List<Comment> getComments(long id) {
         Flux<Comment> userComments = WebClient.create()
                 .get()
-                .uri(String.format("%s/%d/comments", postsUri, id))
+                .uri(String.format("%s/%d/comments", postsUri, id)) // post/id/comments
                 .retrieve()
                 .bodyToFlux(Comment.class);
 

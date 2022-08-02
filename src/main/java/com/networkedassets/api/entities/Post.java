@@ -53,7 +53,7 @@ public class Post {
         return commentList;
     }
 
-    public void updateComments(List<Comment> list) {
+    public void appendComments(List<Comment> list) {
         commentList.addAll(list);
     }
 

@@ -30,7 +30,7 @@ public class PostController {
 
         for (Post post : posts) {
             List<Comment> comments = postService.getComments(post.getId());
-            post.updateComments(comments);
+            post.appendComments(comments);
         }
         // end TODO
 

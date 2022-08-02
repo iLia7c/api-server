@@ -48,7 +48,7 @@ public class SaveUtilsTest {
         post.setId(1L);
         post.setUserId(2L);
         post.setTitle("title");
-        post.updateComments(Arrays.asList(new Comment()));
+        post.appendComments(Arrays.asList(new Comment()));
         return post;
     }
 }
